@@ -1,0 +1,8 @@
+.nav-item:hover {
+  border-bottom: 2px solid white;
+}
+
+#log:hover {
+  background-color: #75b2dd;
+}
+

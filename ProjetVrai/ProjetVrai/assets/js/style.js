@@ -1,0 +1,10 @@
+$(document).ready(function(){
+    $("#menuProfil").mouseleave(function(){
+        $("#menuProfil").removeClass("show");
+        $("#profil").css("background-color","transparent");
+    });
+    $("#profil").hover(function(){
+       $("#profil").css("background-color","#008ed6"); 
+        $("#menuProfil").addClass("show");
+  	});
+})

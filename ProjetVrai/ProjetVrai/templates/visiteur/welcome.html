@@ -1,0 +1,178 @@
+{% extends "visiteur/base.html" %}
+{% block title %} page Visiteur {% endblock %}
+{% block css %}
+	<link rel="stylesheet" href="assets/css/Article-List.css">
+	<link rel="stylesheet" href="assets/css/Footer-Basic.css">
+	<link rel="stylesheet" href="assets/css/ContainerTableau-by-ando.css">
+{% endblock %}
+{% block nomVisiteur %}{{ logged_user.nomClient }}{% endblock %}
+{% block class0 %}monNavActive{% endblock %}
+{% block content %}
+<br/>
+ <!--   ok ny achat -->
+	{% if ok in "" %}
+	{% else %}
+	<ul class="messagelist" id="succes" style="position:fixed;position: fixed;margin-top: revert;z-index: 9;">
+              <li class="success" style="
+              padding-left: 40px;
+    background-position: 15px 12px;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #dfd url(assets/img/icon-yes.svg) 40px 12px no-repeat;
+    background-size: 16px auto;
+    color: #333;"> <a href="#">{{ ok }}</a></li></ul>
+    <script type="text/javascript">
+    $("#succes").fadeOut(6000,function(){
+    	document.location.href="/welcome"
+	});
+	</script>
+    {% endif %}
+ <!-- fin ok -->   
+ <!--  tsy ok ny achat -->
+    {% if ko in "" %}
+	{% else %}
+	<ul class="messagelist" id="succes" style="position:fixed;position: fixed;margin-top: revert;z-index: 9;">
+              <li class="error" style="
+              padding-left: 40px;
+              
+    background-position: 15px 12px;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #f1e880 url(assets/img/icon-no.svg) 40px 12px no-repeat;
+    background-size: 16px auto;
+    color: #333;"> <a href="#">{{ ko }}</a></li></ul>
+    <script type="text/javascript">
+    $("#succes").fadeOut(6000,function(){
+    	//document.location.href="/welcome"
+	});
+	</script>
+    {% endif %}
+ <!--  fin tsy ok -->
+    
+<br/>
+	<div class="article-list">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Liste des matériels</h2>
+                <p class="text-center">Voici les listes des materiels informatiques que nous avons sur stock. Chaque materiel est identifié par un numero </p>
+            </div>
+            <div class="row articles">
+            	{% if lenMat > 0 %}
+            	{% for materiel in materiels %}
+                <div class="col-sm-6 col-md-4 item">
+                	<a href="#"><img class="img-fluid" src=" {{materiel.image.url}}"></a>
+                    <h3 class="name">Numero : {{ materiel.numMat }}</h3>
+                    <p class="description">Design : {{ materiel.design }}</p>
+                    <p class="description">Prix : {{ materiel.Pu }} Ar</p>
+                    <p class="description">Stock : {{ materiel.Stock }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-sm-6 col-md-4 item">
+                	
+                </div>
+                <div class="col-sm-6 col-md-4 item">
+                	<a href="#"><img class="img-fluid" src="assets/img/none.ico"></a>
+                    <h3 class="name"></h3>
+                    <p class="name">il n'y a pas de materiel en stock pour le moment</p>
+                    <p class="description"></p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="text-align: center;" id="Achat">
+    	<h2 class="text-center">Acheter un matériel</h2>
+    	<br/>
+    	<br/>
+    	
+    	<form action="/welcome" method="POST">
+    	{% csrf_token %}
+			{% if error or ko %}
+			<p class="errornote" id="ko" style="color:red;text-align:center;font-size: 14px;
+    font-weight: 700;
+    display: block;
+    padding: 10px 12px;
+    margin: 0 0 10px 0;
+    color: #ba2121;
+    border: 1px solid #ba2121;
+    border-radius: 4px;
+    background-color: #fff;
+    background-position: 5px 12px;">{{ error }}{{ ko }}</p>
+			{% endif %}
+			<script type="text/javascript">
+    			//$("#ko").fadeOut(6000,function(){
+    				
+				//});
+			</script>
+			<input type="hidden" name="id" id="id" >
+        <section><label>Numero du materiel : &nbsp;&nbsp;</label><input type="text" name="numMat" id="numMat" maxlength="4" required></section><br/>
+        <section><label>Quantité &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;&nbsp;</label><input type="number" id="qte" name="qte" required></section><br/>
+        <!-- <section><label>Date d'achat &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;&nbsp;</label><input type="date" name="dateAchat"></section><br/>
+        <section> --> 
+        	<input type="hidden" name="numClient" value="{{ logged_user.numClient }}">
+        	<button class="btn btn-primary" name="ajoutAchat" type="submit">Acheter</button>
+        	<button class="btn btn-primary" name="modifAchat" type="submit">Modifier Achat</button>
+        </section>
+        </form>
+    </div>
+    
+    
+    <div class="container" id="containerTableau">
+    <div class="col-md-12 search-table-col">
+        <div class="form-group pull-right col-lg-4"><input type="text" id="searchTxt" class="search form-control" placeholder="Search by typing here.."><button class="btn btn-primary" id="searchEn" type="button"><i class="icon ion-search"></i></button></div><span class="counter pull-right"></span>
+        <div
+            class="table-responsive table-bordered table table-hover table-bordered results" id="tableStandard">
+            <table class="table table-bordered table-hover">
+                <thead class="bill-header cs">
+                    <tr>
+                        <th id="matricule">id</th>
+                        <th id="trs-hd">numero materiel&nbsp;</th>
+                        <th id="matricule">quantité</th>
+                        <th id="trs-hd">date achat</th>
+                        <th id="trs-hd">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning no-result">
+                        <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                    </tr>
+                    {% for achat in achats %}
+                    <tr>
+                        <td id="matriculeEn">{{ achat.id }}</td>
+                        <td id="categorieEn">{{ achat.numMat }}</td>
+                        <td id="emailEn">{{ achat.qte }}</td>
+                        <td id="emailEn">{{ achat.date_achat }}</td>
+                        <td><button class="btn btn-success" id="modifier" onClick="javascript:modifierAchat('{{ achat.id }}','{{achat.numMat}}','{{ achat.qte }}');" style="margin-left: 5px;"  type="submit"><i class="fa fa-edit" style="font-size: 15px;"></i></button><button class="btn btn-danger"
+                                id="SuppressionAchat" onClick="javascript:supprimerAchat('{{ achat.id}}');" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="footer-basic" id="footer">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Acceuil</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">A propos</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2021</p>
+        </footer>
+    </div>
+{% endblock %}

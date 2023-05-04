@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="text-center">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>register</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="text-left login-clean">
+        <form method="post" action="register">
+        	<a href="/"><i class="fa fa-home" style="font-size: xx-large;"></i></a>
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="fa fa-user"></i></div>
+            {% csrf_token %}
+			{% if error %}
+			<p class="errornote" style="color:red;text-align:center;font-size: 14px;font-weight: 700;display: block;
+    padding: 10px 12px;
+    margin: 0 0 10px 0;
+    color: #ba2121;
+    border: 1px solid #ba2121;
+    border-radius: 4px;
+    background-color: #fff;
+    background-position: 5px 12px;">{{ error }}</p>
+			{% endif %}
+            <div class="form-group"><input class="form-control" type="text" name="numero" maxlength="4" placeholder="Numéro" required></div>
+            <div class="form-group"><input class="form-control" type="text" name="nom"  placeholder="Nom" required></div>
+            <div class="form-group"><input class="form-control" type="password" name="password1" placeholder="Mot de Passe" required></div>
+            <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="Confirmer Mot de Passe" required></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="register">S' enregistrer</button></div>
+            <a href="login" style="font-size: 14px;float: right;opacity: 0.90;">avez-vous &nbsp;déja un compte ?</a><br/><br/></form>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+</body>
+
+</html>

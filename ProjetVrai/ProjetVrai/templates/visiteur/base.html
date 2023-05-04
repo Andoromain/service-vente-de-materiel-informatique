@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="assets/css/header-1.css">
+    <link rel="stylesheet" href="assets/css/header-2.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/jquery.min.js"></script>
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="padding:0px;position: fixed;width: -webkit-fill-available;z-index:10;width: -moz-available;">
+        <div class="container"><img style="width: 4%;margin-left: -2%;height: 2%;" src="assets/img/TV.jpg">
+            <div><a class="navbar-brand" href="#">&nbsp; &nbsp; &nbsp; &nbsp;Vente de materiel informatique</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item monNav {% block class0 %}{% endblock%}" role="presentation" href="#" style="color: white;"><a class="nav-link active" href="welcome" style="color: white;">Liste des Materiels</a></li>
+                    <li class="nav-item monNav {% block class1 %}{% endblock%}" role="presentation"><a class="nav-link" href="#Achat" style="color: white;">Achat</a></li>
+                    <li class="nav-item monNav {% block class2 %}{% endblock%}" role="presentation"><a class="nav-link" href="#footer" style="color: white;">&nbsp;Contacter</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link log" data-toggle="dropdown" aria-expanded="false" id="profil" style="color: white;padding: 9px;" href="#">{% block nomVisiteur %}{% endblock %}<img style="width:30px;height:30px;padding:0;margin-left:5px;" src="assets/img/olon.png"></a>
+                        <div
+                            class="dropdown-menu" role="menu" id="menuProfil"><a class="dropdown-item" role="presentation" href="logout">Logout <i class="fa fa-user-times" id="logouticon"></i></a></div>
+        </li>
+        </ul>
+        </div>
+        </div>
+    </nav>
+    {% block content %}{% endblock %}
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/fonction.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/style.js"></script>
+    <script src="assets/js/ContainerTableau-by-ando-1.js"></script>
+    <script src="assets/js/ContainerTableau-by-ando-2.js"></script>
+    <script src="assets/js/ContainerTableau-by-ando.js"></script>
+</body>
+
+</html>
